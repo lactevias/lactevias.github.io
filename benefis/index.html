@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Бенефис · 62 · Театр одной мамы</title>
+<meta name="theme-color" content="#EFEFC9">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,500;1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..600;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EFEFC9; --paper-2:#e5e4b9; --ink:#2F1B1A; --wine:#640017; --olive:#5A5E27; --olive-lt:#c9cc8c;
+  --muted:#6a5246; --rule:#2F1B1A; --accent:var(--olive);
+  --font-display:"Bitter",Georgia,serif; --font-text:"Source Serif 4","Source Serif Pro",Georgia,serif;
+  --gutter:clamp(20px, 10px + 3.4vw, 64px); --sec:clamp(80px, 40px + 10vw, 176px);
+  --ease:cubic-bezier(.22,1,.36,1); --ease-draw:cubic-bezier(.65,0,.35,1);
+  --slash:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 30'%3E%3Cpath d='M9 2 3.5 28M17 2 11.5 28' stroke='black' stroke-width='2.8' stroke-linecap='round' fill='none'/%3E%3C/svg%3E");
+}
+.dark{--ink:#EFEFC9;--muted:#cbbd9c;--rule:rgba(239,239,201,.38);--accent:var(--olive-lt);--wine:#EFEFC9;background:#2F1B1A;color:var(--ink)}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;overflow-x:clip}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-text);font-size:clamp(19px,18px + .3vw,21px);line-height:1.55;font-variant-numeric:lining-nums;text-rendering:optimizeLegibility;overflow-x:hidden;overflow-x:clip}
+body.locked{overflow:hidden;height:100vh}
+::selection{background:var(--wine);color:var(--paper)}
+:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+img{display:block;max-width:100%}
+p,h1,h2,h3,figure{margin:0}
+a{color:inherit}
+.wrap{max-width:1280px;margin:0 auto;padding-inline:var(--gutter)}
+
+/* paper grain */
+.grain{position:fixed;inset:-50%;z-index:90;pointer-events:none;opacity:.16;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.18 0 0 0 0 0.1 0 0 0 0 0.1 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 1.4s steps(6) infinite}
+@keyframes grain{0%,100%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}}
+
+/* ---------- type ---------- */
+.label{font-family:var(--font-text);font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;line-height:1.3}
+.display{font-family:var(--font-display);font-weight:500;letter-spacing:-.035em;line-height:.9;color:var(--wine)}
+.h2{font-family:var(--font-display);font-weight:500;font-size:clamp(40px,8.6vw,104px);line-height:.95;letter-spacing:-.03em;color:var(--wine);text-wrap:balance}
+.h2 em{font-style:italic;font-weight:400}
+.lead{font-size:clamp(23px,19px + 1.1vw,32px);line-height:1.35;max-width:30ch}
+.muted{color:var(--muted)}
+.it{font-style:italic}
+
+/* slug: programme section header */
+.slug{display:flex;align-items:baseline;gap:14px;padding-top:12px;border-top:1px solid var(--rule);margin-bottom:clamp(28px,5vw,56px)}
+.slug .no{font-family:var(--font-display);font-style:italic;font-size:19px;color:var(--accent)}
+.slug .nm{font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.slug .sb{margin-left:auto;font-size:17px;font-style:italic;color:var(--muted);text-align:right}
+
+.sec{padding-block:var(--sec)}
+@media(min-width:980px){
+  .grid{display:grid;grid-template-columns:220px minmax(0,1fr);column-gap:64px}
+  .grid>.slug{flex-direction:column;gap:6px;align-self:start;position:sticky;top:76px;margin-bottom:0}
+  .grid>.slug .sb{margin-left:0;text-align:left}
+}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv.is-in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+
+/* wavy underline */
+.wavy{position:relative;display:inline-block;white-space:nowrap}
+.wavy svg{position:absolute;left:-2%;bottom:-.14em;width:104%;height:.26em;overflow:visible;pointer-events:none}
+.wavy path{fill:none;stroke:var(--accent);stroke-width:2.4px;vector-effect:non-scaling-stroke;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .9s var(--ease-draw) .4s}
+.is-in .wavy path,.wavy.is-in path{stroke-dashoffset:0}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:14px;min-height:56px;padding:0 26px;border:1px solid var(--ink);border-radius:0;background:var(--ink);color:var(--paper);font:inherit;font-size:19px;letter-spacing:.01em;cursor:pointer;text-decoration:none;transition:background-color .2s var(--ease),color .2s var(--ease),transform .12s;-webkit-tap-highlight-color:transparent}
+.dark .btn{background:var(--paper);color:#2F1B1A;border-color:var(--paper)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn:active{transform:translateY(1px)}
+.btn:disabled{opacity:.55;cursor:default}
+@media(hover:hover){.btn:hover{background:var(--wine);border-color:var(--wine);color:var(--paper)} .dark .btn:hover{background:var(--olive-lt);border-color:var(--olive-lt);color:#2F1B1A} .btn:hover .arrow{transform:translateX(5px)}}
+.arrow{width:28px;height:14px;flex:none;transition:transform .2s var(--ease)}
+
+/* duotone photos: tap to develop */
+.duo{position:relative;overflow:hidden;background:var(--paper);isolation:isolate;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.duo img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.15) brightness(1.06);mix-blend-mode:multiply}
+.duo::after{content:"";position:absolute;inset:0;background:#4f0a17;mix-blend-mode:screen;pointer-events:none;transition:opacity .9s var(--ease)}
+.duo.color img{filter:none;mix-blend-mode:normal}
+.duo.color::after{opacity:0}
+.duo .dev{position:absolute;left:10px;bottom:10px;z-index:2;padding:6px 10px;background:rgba(47,27,26,.82);color:#EFEFC9;font-size:13px;letter-spacing:.14em;text-transform:uppercase;transition:opacity .4s}
+.duo.color .dev{opacity:0}
+
+/* ---------- top bar ---------- */
+.bar{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;align-items:center;gap:12px;height:calc(48px + env(safe-area-inset-top));padding:env(safe-area-inset-top) var(--gutter) 0;background:rgba(239,239,201,.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid rgba(47,27,26,.25);color:#2F1B1A;transform:translateY(-100%);transition:transform .6s var(--ease)}
+.bar.show{transform:none}
+.bar .brand{font-family:var(--font-display);font-weight:500;font-size:18px;letter-spacing:-.01em;white-space:nowrap}
+.bar .act{font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#6a5246;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .snd{margin-left:auto;display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:0 12px;border:1px solid rgba(47,27,26,.5);border-radius:999px;background:none;color:inherit;font:inherit;font-size:16px;cursor:pointer}
+.bar .eq{display:inline-flex;align-items:flex-end;gap:2px;height:12px}
+.bar .eq i{width:2px;height:3px;background:#640017}
+.bar .snd.on .eq i{animation:eq 1s ease-in-out infinite}
+.bar .snd.on .eq i:nth-child(2){animation-delay:.2s}.bar .snd.on .eq i:nth-child(3){animation-delay:.4s}
+@keyframes eq{0%,100%{height:3px}50%{height:12px}}
+.bar .prog{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:#640017;transform-origin:0 50%;transform:scaleX(0)}
+@media(max-width:520px){.bar .brand{display:none}}
+
+/* ---------- curtain ---------- */
+.curtain{position:fixed;inset:0;z-index:100;display:flex;align-items:flex-end}
+.curtain .panel{position:absolute;top:0;bottom:0;width:50.5%;transition:transform 1.7s var(--ease-draw);
+  background:linear-gradient(180deg,rgba(255,220,200,.05),rgba(0,0,0,.55)),repeating-linear-gradient(90deg,#1e040a 0,#3a0711 12px,#5c0016 24px,#7a0b22 28px,#4a0612 38px,#28050d 52px,#1e040a 62px)}
+.curtain .left{left:0}.curtain .right{right:0}
+.curtain .pelmet{position:absolute;top:0;left:0;right:0;height:calc(18px + env(safe-area-inset-top));background:linear-gradient(#140306,#2a0710);box-shadow:0 8px 20px rgba(0,0,0,.5);z-index:2;transition:transform 1.2s var(--ease-draw) .2s}
+.curtain .stage{position:relative;z-index:3;width:100%;max-width:680px;padding:0 var(--gutter) calc(44px + env(safe-area-inset-bottom));color:#EFEFC9;transition:opacity .5s var(--ease)}
+.curtain .stage .label{color:#c9cc8c;display:flex;gap:10px;align-items:center}
+.curtain .stage .label i{width:8px;height:8px;border-radius:50%;background:#c9cc8c;animation:ring 2.4s infinite}
+.curtain .stage .label i:nth-child(2){animation-delay:.3s}.curtain .stage .label i:nth-child(3){animation-delay:.6s}
+@keyframes ring{0%,100%{opacity:.25}20%{opacity:1}}
+.curtain h1{font-family:var(--font-display);font-weight:500;font-size:clamp(48px,13vw,120px);line-height:.92;letter-spacing:-.035em;margin:18px 0 18px;text-shadow:0 4px 30px rgba(20,0,4,.6)}
+.curtain h1 em{font-style:italic;font-weight:400}
+.curtain .note{max-width:34ch;font-size:20px;line-height:1.45;opacity:.85;margin-bottom:28px}
+.curtain .acts{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px}
+.curtain .btn{background:#EFEFC9;color:#2F1B1A;border-color:#EFEFC9}
+.curtain .quiet{background:none;border:0;padding:10px 0;color:#EFEFC9;opacity:.75;font:inherit;font-size:18px;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.curtain .bis{position:absolute;left:var(--gutter);bottom:calc(44px + env(safe-area-inset-bottom));z-index:3;display:none;font-family:var(--font-display);font-style:italic;font-size:clamp(72px,22vw,200px);line-height:.9;color:#EFEFC9;letter-spacing:-.03em}
+.curtain.open .left{transform:translateX(-101%)}
+.curtain.open .right{transform:translateX(101%)}
+.curtain.open .pelmet{transform:translateY(-100%)}
+.curtain.open .stage{opacity:0}
+.curtain.gone{display:none}
+.curtain.bow-mode .stage{display:none}
+.curtain.bow-mode .bis{display:block;opacity:0;transition:opacity .5s .9s}
+.curtain.bow-mode:not(.open) .bis{opacity:1}
+
+/* ---------- cover ---------- */
+.cover{padding-top:calc(76px + env(safe-area-inset-top));padding-bottom:var(--sec);position:relative}
+.meta{display:grid;grid-template-columns:1fr auto;gap:6px 16px;padding-bottom:12px;border-bottom:1px solid var(--rule)}
+.meta span:last-child{text-align:right}
+@media(min-width:760px){.meta{grid-template-columns:1fr 1fr 1fr}.meta span:nth-child(2){text-align:center}}
+.meta .mid{display:none}@media(min-width:760px){.meta .mid{display:block}}
+.title{font-size:min(20.5vw,300px);margin:clamp(18px,3vw,36px) 0 0 -.04em}
+.subtitle{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;margin-top:14px;padding-top:12px;border-top:1px solid var(--rule)}
+.subtitle .it{font-size:clamp(21px,17px + 1vw,28px);line-height:1.3;max-width:24ch}
+.cover-stage{margin-top:clamp(40px,7vw,88px);display:grid;gap:clamp(40px,6vw,72px)}
+.cover-photo{width:min(80%,520px);margin-left:auto}
+.art{position:relative}
+.cover-photo .duo{aspect-ratio:4/5;border-radius:999px 999px 0 0}
+.cover-photo .dev{left:auto;right:10px}
+.cover-photo figcaption{margin-top:12px;display:grid;grid-template-columns:auto 1fr;gap:12px;font-size:17px;line-height:1.4}
+.cover-photo figcaption .label{color:var(--muted);padding-top:3px}
+.big62{position:absolute;left:-25%;bottom:-.04em;z-index:3;font-family:var(--font-text);font-weight:600;font-variation-settings:"opsz" 60;font-size:min(56vw,460px);line-height:.8;letter-spacing:-.06em;color:var(--wine);mix-blend-mode:multiply;pointer-events:none}
+.cover-text{display:grid;gap:18px}
+@media(min-width:900px){
+  .cover-stage{grid-template-columns:minmax(0,.9fr) minmax(0,1fr);column-gap:clamp(48px,6vw,96px);align-items:start}
+  .cover-photo{grid-column:2;grid-row:1;width:100%;margin:0}
+  .cover-text{grid-column:1;grid-row:1;padding-top:clamp(24px,4vw,64px)}
+  .big62{left:-.62em;bottom:-.1em;font-size:min(25vw,380px)}
+}
+/* ticker */
+.ticker{overflow:hidden;white-space:nowrap;background:#2F1B1A;color:#EFEFC9;padding:13px 0}
+.ticker .track{display:inline-flex;gap:26px;animation:tick 40s linear infinite;font-family:var(--font-display);font-style:italic;font-size:clamp(24px,5vw,34px)}
+.ticker .track span{display:inline-flex;align-items:center;gap:26px}
+.ticker .track span::after{content:"";width:11px;height:16px;background:#c9cc8c;-webkit-mask:var(--slash) center/contain no-repeat;mask:var(--slash) center/contain no-repeat}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* cast */
+.cast{list-style:none;margin:clamp(32px,5vw,56px) 0 0;padding:0;border-top:1px solid var(--rule)}
+.cast li{display:grid;gap:6px;padding:20px 0 22px;border-bottom:1px solid var(--rule)}
+@media(min-width:720px){.cast li{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:32px;align-items:baseline}}
+.cast .role{font-family:var(--font-display);font-weight:500;font-size:clamp(29px,4.4vw,44px);line-height:1.05;letter-spacing:-.02em;color:var(--wine)}
+.cast .who{font-size:clamp(19px,18px + .3vw,21px);line-height:1.5}
+.cast .who b{display:block;font-size:14px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+
+/* mirror */
+.mirror{background:var(--paper-2)}
+.mirror-body{display:grid;gap:28px}
+@media(min-width:900px){.mirror-body{grid-template-columns:minmax(0,1fr) minmax(0,.8fr);align-items:end;column-gap:64px}}
+.num-btn{background:none;border:0;padding:0;cursor:pointer;color:inherit;text-align:left;-webkit-tap-highlight-color:transparent;perspective:900px}
+.num{display:inline-block;font-family:var(--font-text);font-weight:600;font-variation-settings:"opsz" 60;font-size:min(62vw,420px);line-height:.78;letter-spacing:-.06em;color:var(--wine);transition:transform .45s var(--ease-draw);transform-origin:50% 50%}
+.num.turn{transform:rotateY(90deg)}
+.reflect{display:block;font-family:var(--font-text);font-weight:600;font-variation-settings:"opsz" 60;font-size:min(62vw,420px);line-height:.78;letter-spacing:-.06em;color:var(--wine);transform:scaleY(-1);opacity:.16;height:.34em;overflow:hidden;-webkit-mask:linear-gradient(to top,#000,transparent);mask:linear-gradient(to top,#000,transparent);margin-top:2px;transition:opacity .3s}
+.reflect span{display:block;transform:translateY(-.44em)}
+.mirror-cap{font-size:clamp(23px,19px + 1.1vw,32px);line-height:1.35;max-width:24ch;min-height:4.2em;transition:opacity .3s}
+.mirror-cap.fade{opacity:0}
+.hint{margin-top:14px;color:var(--muted)}
+
+/* dossier */
+.facts{display:grid;border-top:1px solid var(--rule);margin-top:clamp(32px,5vw,56px)}
+@media(min-width:860px){.facts{grid-template-columns:1fr 1fr;column-gap:48px}}
+.fact{padding:24px 0 28px;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:56px minmax(0,1fr);gap:8px 12px}
+.fact .n{font-family:var(--font-display);font-style:italic;font-size:32px;line-height:1;color:var(--accent)}
+.fact h3{font-family:var(--font-display);font-weight:500;font-size:clamp(26px,3.2vw,34px);line-height:1.1;letter-spacing:-.015em;color:var(--wine);margin-bottom:10px}
+.fact p{font-size:clamp(19px,18px + .3vw,21px);line-height:1.55}
+
+/* chronicle */
+.strip{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gutter);padding:4px var(--gutter) 8px;margin:clamp(32px,5vw,56px) calc(var(--gutter) * -1) 0;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.strip::-webkit-scrollbar{display:none}
+.frame{flex:none;width:min(74vw,360px);scroll-snap-align:start}
+.frame.wide{width:min(90vw,520px)}
+.frame .duo{aspect-ratio:3/4}
+.frame.wide .duo{aspect-ratio:4/3}
+.frame figcaption{display:grid;grid-template-columns:auto 1fr;gap:12px;margin-top:12px;padding-top:10px;border-top:1px solid var(--rule);font-size:17px;line-height:1.4}
+.frame figcaption .label{color:var(--accent);padding-top:1px}
+.swipe{margin-top:16px;color:var(--muted)}
+
+/* intermission */
+.intermission{position:relative;overflow:hidden}
+.intermission .h2{color:var(--paper);font-style:italic;font-weight:400;font-size:clamp(44px,15.5vw,150px);line-height:.85;margin-bottom:clamp(28px,5vw,48px)}
+.intermission .body{display:grid;gap:18px;max-width:38ch;font-size:clamp(21px,18px + 1vw,27px);line-height:1.45}
+.tulip{position:absolute;right:-8%;bottom:-6%;z-index:0;width:min(78vw,620px);height:auto;color:var(--olive-lt);opacity:.09;pointer-events:none;-webkit-mask:linear-gradient(to bottom,transparent 0%,#000 45%);mask:linear-gradient(to bottom,transparent 0%,#000 45%)}
+.intermission>.wrap{position:relative;z-index:1}
+.tulip path{fill:none;stroke:currentColor;stroke-width:.9;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 2.4s var(--ease-draw)}
+.tulip.is-in path{stroke-dashoffset:0}
+.notice{margin-top:clamp(40px,6vw,64px);max-width:460px;padding:18px 0 0;border-top:1px solid var(--rule)}
+.notice .label{color:var(--accent);margin-bottom:10px}
+.notice p{font-size:clamp(19px,18px + .3vw,21px);line-height:1.45}
+.notice p+p{margin-top:8px;color:var(--muted)}
+
+/* gift stage */
+.gift{position:relative;overflow:hidden;isolation:isolate}
+.beam{position:absolute;left:62%;top:-6%;width:200%;height:112%;z-index:-1;pointer-events:none;transform-origin:50% 0;transform:translateX(-50%);
+  background:conic-gradient(from 166deg at 50% 0%,transparent 0deg,rgba(255,240,205,.06) 8deg,rgba(255,240,205,.13) 14deg,rgba(255,240,205,.06) 20deg,transparent 28deg);
+  animation:sway 9s ease-in-out infinite alternate;mix-blend-mode:screen}
+@keyframes sway{from{transform:translateX(-50%) rotate(-6deg)}to{transform:translateX(-50%) rotate(5deg)}}
+.footlights{position:absolute;left:0;right:0;bottom:0;height:52px;z-index:-1;pointer-events:none;
+  background:radial-gradient(ellipse 22px 32px at 50% 100%,rgba(255,214,150,.45),rgba(160,40,40,.12) 55%,transparent 75%) 0 100%/64px 52px repeat-x;animation:flicker 4s ease-in-out infinite}
+@keyframes flicker{0%,100%{opacity:1}48%{opacity:.85}52%{opacity:.95}}
+.gift .h2{color:var(--paper)}
+.gift-intro{margin-top:20px;max-width:34ch;font-size:clamp(21px,18px + 1vw,27px);line-height:1.4;color:var(--muted);font-style:italic}
+.ticket{position:relative;display:grid;max-width:600px;margin-top:clamp(36px,5vw,56px);color:#2F1B1A;filter:drop-shadow(0 30px 60px rgba(0,0,0,.45))}
+@media(min-width:640px){.ticket{grid-template-columns:1fr 160px}}
+.t-main,.t-stub{background:#EFEFC9;position:relative}
+.t-main{padding:24px 24px 22px;border-top:14px solid #640017}
+.t-top{display:flex;justify-content:space-between;gap:12px;font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#6a5246}
+.t-show{font-family:var(--font-display);font-weight:500;font-size:clamp(30px,7vw,44px);line-height:1;letter-spacing:-.025em;color:#640017;margin:16px 0 8px}
+.t-venue{font-size:18px;line-height:1.4}
+.t-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,max-content));justify-content:start;gap:14px 28px;margin:18px 0 0;padding-top:14px;border-top:1px solid #2F1B1A}
+.t-grid dt{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#6a5246}
+.t-grid dd{margin:3px 0 0;font-family:var(--font-display);font-size:24px;line-height:1.1}
+.t-stub{padding:20px 22px;border-top:14px solid #5A5E27;display:flex;flex-direction:column;justify-content:space-between;gap:14px;transition:transform 1s var(--ease-draw),opacity 1s var(--ease-draw);transform-origin:0 0}
+.t-stub::before{content:"";position:absolute;left:0;right:0;top:-8px;height:16px;background:radial-gradient(circle at center,#2F1B1A 0 6px,transparent 6.5px) 0 0/16px 16px repeat-x}
+@media(min-width:640px){.t-stub::before{top:0;bottom:0;left:-8px;right:auto;width:16px;height:auto;background-repeat:repeat-y}}
+.t-stub .num2{font-family:var(--font-text);font-weight:600;font-size:32px;line-height:1;color:#640017;margin-top:4px}
+.barcode{height:40px;background:repeating-linear-gradient(90deg,#2F1B1A 0 2px,transparent 2px 4px,#2F1B1A 4px 5px,transparent 5px 9px,#2F1B1A 9px 12px,transparent 12px 14px)}
+.ticket.torn .t-stub{transform:translate(40px,120px) rotate(16deg);opacity:0;pointer-events:none}
+.gift-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.admitted{max-width:36ch;margin-top:24px;font-size:clamp(21px,18px + 1vw,27px);line-height:1.4;display:none}
+.torn-done .admitted{display:block;animation:up .8s var(--ease) both}
+@keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.dog{margin-top:14px;color:var(--muted);font-style:italic;font-size:19px}
+
+/* wishes */
+.rep{list-style:none;margin:clamp(32px,5vw,56px) 0 0;padding:0;counter-reset:r;border-top:1px solid var(--rule)}
+.rep li{counter-increment:r;display:grid;grid-template-columns:56px 1fr;gap:12px;padding:16px 0 18px;border-bottom:1px solid var(--rule);font-size:clamp(21px,18px + 1vw,28px);line-height:1.35}
+.rep li::before{content:counter(r,upper-roman);font-family:var(--font-display);font-style:italic;font-size:20px;line-height:1.7;color:var(--accent)}
+.poem{margin-top:clamp(56px,8vw,96px);padding-left:20px;border-left:2px solid var(--wine);font-style:italic;font-size:clamp(21px,5.2vw,32px);line-height:1.45;max-width:24em}
+.poem p+p{margin-top:1em}
+
+/* bow */
+.bow .h-bow{font-size:clamp(52px,14vw,176px);line-height:.9;margin:0 0 clamp(32px,5vw,48px) -.03em}
+.bow .h-bow em{font-style:italic;font-weight:400}
+.claps{margin-top:14px;min-height:1.5em;color:var(--muted);font-style:italic}
+.sign{margin-top:clamp(56px,8vw,96px);padding-top:14px;border-top:1px solid var(--rule);display:grid;gap:6px}
+.sign .who{font-family:var(--font-display);font-size:clamp(34px,7vw,56px);line-height:1;letter-spacing:-.02em;color:var(--wine)}
+
+/* footer */
+.foot{padding-top:clamp(56px,8vw,96px);padding-bottom:calc(28px + env(safe-area-inset-bottom))}
+.foot .end{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:clamp(88px,30vw,360px);line-height:.8;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1px rgba(239,239,201,.55);margin-left:-.04em}
+.foot-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px 20px;margin-top:clamp(32px,5vw,56px);padding-top:14px;border-top:1px solid var(--rule);font-size:18px;line-height:1.45}
+@media(min-width:860px){.foot-grid{grid-template-columns:repeat(4,1fr)}}
+.foot-grid .label{color:var(--accent);margin-bottom:6px}
+.foot-grid a{text-underline-offset:3px}
+
+/* ticket viewer */
+.tv{position:fixed;inset:0;z-index:110;display:flex;flex-direction:column;background:rgba(23,12,11,.97);color:#EFEFC9;opacity:0;pointer-events:none;transition:opacity .35s var(--ease)}
+.tv.open{opacity:1;pointer-events:auto}
+.tv-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:calc(10px + env(safe-area-inset-top)) var(--gutter) 10px;border-bottom:1px solid rgba(239,239,201,.25)}
+.tv-bar b{font-family:var(--font-display);font-weight:500;font-size:22px}
+.tv-close{min-height:44px;padding:0 16px;border:1px solid rgba(239,239,201,.55);border-radius:999px;background:none;color:inherit;font:inherit;font-size:17px;cursor:pointer}
+.tv-scroll{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;padding:18px var(--gutter)}
+.tv-scroll img{width:100%;min-width:640px;max-width:1400px;background:#fff}
+@media(min-width:700px){.tv-scroll img{min-width:0}}
+.tv-foot{padding:12px var(--gutter) calc(14px + env(safe-area-inset-bottom));font-size:17px;line-height:1.45;color:#cbbd9c;border-top:1px solid rgba(239,239,201,.25)}
+
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:95;overflow:hidden}
+.confetti i{position:absolute;top:-30px;width:12px;height:18px;-webkit-mask:var(--slash) center/contain no-repeat;mask:var(--slash) center/contain no-repeat;animation:fall linear forwards}
+@keyframes fall{to{transform:translate(var(--dx),110vh) rotate(var(--r))}}
+
+@media(max-width:430px){
+  .meta{grid-template-columns:1fr}
+  .meta span:last-child{text-align:left}
+  .slug{flex-wrap:wrap;row-gap:4px}
+  .slug .sb{flex-basis:100%;margin-left:0;text-align:left}
+  .foot-grid{grid-template-columns:1fr}
+  .fact{grid-template-columns:44px minmax(0,1fr)}
+  .rep li{grid-template-columns:44px 1fr}
+  .t-main{padding:20px 18px}
+  .t-stub{padding:18px}
+}
+@media(max-width:350px){
+  :root{--gutter:16px}
+  .btn{padding:0 18px}
+  .bar .act{font-size:12px}
+}
+@media (prefers-reduced-motion:reduce){
+  .grain,.ticker .track,.beam,.footlights,.curtain .stage .label i{animation:none}
+  .rv{opacity:1;transform:none;transition:none}
+  .curtain .panel,.curtain .pelmet{transition-duration:.01s}
+  .wavy path,.tulip path{transition:none;stroke-dashoffset:0}
+}
+</style>
+</head>
+<body class="locked">
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ЗАНАВЕС -->
+<div class="curtain" id="curtain" role="dialog" aria-label="Начало">
+  <div class="panel left"></div><div class="panel right"></div>
+  <div class="pelmet"></div>
+  <div class="bis">Браво!</div>
+  <div class="stage">
+    <p class="label"><i></i><i></i><i></i>&nbsp;звонок третий</p>
+    <h1>Всё самое интересное — <em>внутри</em></h1>
+    <p class="note">Телефоны можно не выключать. Наоборот — сделайте погромче.</p>
+    <div class="acts">
+      <button class="btn" id="enter">Войти внутрь <svg class="arrow" viewBox="0 0 28 14" aria-hidden="true"><path d="M0 7h26M20 1l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+      <button class="quiet" id="enterSilent">без музыки</button>
+    </div>
+  </div>
+</div>
+
+<!-- ВЕРХНЯЯ ПАНЕЛЬ -->
+<div class="bar" id="bar">
+  <span class="brand">Театр одной мамы</span>
+  <span class="act" id="actNow">Бенефис</span>
+  <button class="snd" id="sound" aria-pressed="false"><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span><span class="lbl">звук</span></button>
+  <span class="prog" id="prog"></span>
+</div>
+
+<!-- ОБЛОЖКА -->
+<header class="cover wrap" id="top" data-act="Обложка">
+  <div class="meta label"><span>Театр одной мамы</span><span class="mid">программа вечера</span><span>сезон 62 · 19.11.26</span></div>
+  <h1 class="display title rv">Бенефис</h1>
+  <div class="subtitle rv d1"><p class="it">в одном действии и шестидесяти двух сезонах</p><p class="label muted">без дублёров</p></div>
+
+  <div class="cover-stage">
+    <figure class="cover-photo rv d2">
+      <div class="art">
+        <div class="duo"><img src="photos/hero.jpg" alt="Мама за столиком в ресторане, взгляд вверх" style="object-position:50% 28%"><span class="dev">проявить</span></div>
+        <div class="big62" aria-hidden="true">62</div>
+      </div>
+      <figcaption><span class="label">фото 1</span><span class="it">Исполнительница главной роли думает о высоком. Апероль — реквизит.</span></figcaption>
+    </figure>
+    <div class="cover-text">
+      <p class="label muted rv">от режиссёра</p>
+      <p class="lead rv d1">Шестьдесят два сезона. Ни одной замены состава, ни одного отменённого спектакля, суфлёр так и не понадобился. Сегодня играют для тебя.</p>
+    </div>
+  </div>
+</header>
+
+<div class="ticker" aria-hidden="true"><div class="track">
+  <span>премьера</span><span>аншлаг</span><span>билет внутри</span><span>браво</span><span>19 ноября</span><span>играем раз в году</span>
+  <span>премьера</span><span>аншлаг</span><span>билет внутри</span><span>браво</span><span>19 ноября</span><span>играем раз в году</span>
+</div></div>
+
+<!-- ПРОЛОГ -->
+<section class="sec wrap grid" data-act="01 · Пролог">
+  <div class="slug"><span class="no">01</span><span class="nm">Пролог</span><span class="sb">знакомство с труппой</span></div>
+  <div>
+    <h2 class="h2 rv">Действующие лица <em>и исполнители</em></h2>
+    <ul class="cast">
+      <li class="rv"><span class="role">Мама</span><span class="who"><b>в главной роли</b>Шестьдесят два сезона без дублёров. Текст знает наизусть, импровизирует блестяще.</span></li>
+      <li class="rv"><span class="role">Бабушка</span><span class="who"><b>неразлучная партнёрша</b>Выходят на сцену только вместе. По отдельности не гастролируют.</span></li>
+      <li class="rv"><span class="role">Белоснежка</span><span class="who"><b>роль выдана критиком 11 лет</b>Обжалованию не подлежит.</span></li>
+      <li class="rv"><span class="role">Дорн и Рахманинов</span><span class="who"><b>музыка</b>Не спрашивайте, как они уживаются в одном плейлисте. Уживаются.</span></li>
+      <li class="rv"><span class="role">Тюльпаны</span><span class="who"><b>сняты с роли</b>Подробности в антракте, без скандала.</span></li>
+      <li class="rv"><span class="role">Дочь</span><span class="who"><b>автор и режиссёр, 26 лет</b>Та же цифра, только наоборот.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ЗЕРКАЛО -->
+<section class="sec mirror" id="mirror" data-act="02 · Сцена у зеркала">
+  <div class="wrap grid">
+    <div class="slug"><span class="no">02</span><span class="nm">Сцена у зеркала</span><span class="sb">акт первый</span></div>
+    <div class="mirror-body">
+      <div>
+        <button class="num-btn" id="flipBtn" aria-label="Отразить цифру"><span class="num" id="num">62</span></button>
+        <span class="reflect" aria-hidden="true"><span id="refl">62</span></span>
+      </div>
+      <div>
+        <p class="mirror-cap" id="cap" aria-live="polite">Это тебе.</p>
+        <p class="hint it">нажми на цифру — посмотри в зеркало</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ДОСЬЕ -->
+<section class="sec wrap grid" data-act="03 · Досье">
+  <div class="slug"><span class="no">03</span><span class="nm">Досье</span><span class="sb">из гримёрки</span></div>
+  <div>
+    <h2 class="h2 rv">Пять фактов, <em>которые нельзя публиковать</em></h2>
+    <div class="facts">
+      <article class="fact rv"><span class="n">i</span><div><h3>Красиво постаревшая Белоснежка</h3><p>Так тебя в одиннадцать лет назвала дочь. Комплимент вышел кривой, но честный. С годами выяснилось: «Белоснежка» — правда, «постаревшая» — клевета. Критик раскаивается.</p></div></article>
+      <article class="fact rv d1"><span class="n">ii</span><div><h3>Неразлучницы</h3><p>Мама и бабушка. Ходят парой, как два билета в один ряд. Если позвать одну, приходят обе — и это лучший расклад.</p></div></article>
+      <article class="fact rv"><span class="n">iii</span><div><h3>Плейлист моложе паспорта</h3><p>Дорн, потом Рахманинов, потом снова Дорн. Мы пытались найти в этом систему. Системы нет, есть вкус.</p></div></article>
+      <article class="fact rv d1"><span class="n">iv</span><div><h3>Стихи и титры</h3><p>Читает стихи без повода. Из кино уходит последней: титры кончились, а она ещё сидит и молчит. Так выглядит культура, если кто не видел.</p></div></article>
+      <article class="fact rv"><span class="n">v</span><div><h3>Любимые цветы — тюльпаны</h3><p>Запомните. Это чеховское ружьё — выстрелит в антракте.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ХРОНИКА -->
+<section class="sec wrap grid" style="padding-top:0" data-act="04 · Хроника">
+  <div class="slug"><span class="no">04</span><span class="nm">Хроника</span><span class="sb">репетиции, гастроли, закулисье</span></div>
+  <div>
+    <h2 class="h2 rv">Кадры <em>проявляются от прикосновения</em></h2>
+    <div class="strip rv d1">
+      <figure class="frame"><div class="duo"><img src="photos/cake.jpg" alt="Мама в чёрной водолазке с тортом и вилкой" loading="lazy" style="object-position:46% 40%"><span class="dev">проявить</span></div><figcaption><span class="label">кадр 01</span><span class="it">Из архива. Водолазка, торт, вилка. Взгляд: «я всё про вас знаю».</span></figcaption></figure>
+      <figure class="frame"><div class="duo"><img src="photos/grad.jpg" alt="Мама и дочь на выпускном" loading="lazy" style="object-position:48% 50%"><span class="dev">проявить</span></div><figcaption><span class="label">кадр 02</span><span class="it">Выпускной. Выпускалась я, а смотрят всё равно на тебя.</span></figcaption></figure>
+      <figure class="frame wide"><div class="duo"><img src="photos/sofa.jpg" alt="Мама и дочь на диване на фоне ковра" loading="lazy" style="object-position:52% 40%"><span class="dev">проявить</span></div><figcaption><span class="label">кадр 03</span><span class="it">Декорации: ковёр. Состав: лучший из возможных.</span></figcaption></figure>
+      <figure class="frame"><div class="duo"><img src="photos/lift.jpg" alt="Мама в тёмных очках в лифте" loading="lazy" style="object-position:40% 62%"><span class="dev">проявить</span></div><figcaption><span class="label">кадр 04</span><span class="it">Лифт, очки, мокрые волосы. Звезда без комментариев.</span></figcaption></figure>
+    </div>
+    <p class="swipe it">листай вбок →</p>
+  </div>
+</section>
+
+<!-- АНТРАКТ -->
+<section class="sec dark intermission" data-act="05 · Антракт">
+  <svg class="tulip" viewBox="0 0 58 86" aria-hidden="true"><path pathLength="1" d="M29 84 V40 M29 62 C 18 56, 10 48, 8 38 M29 70 C 40 64, 47 56, 49 46 M17 30 C 12 18, 16 8, 20 4 C 22 12, 26 16, 29 18 C 32 16, 36 12, 38 4 C 42 8, 46 18, 41 30 C 37 38, 21 38, 17 30 Z"/></svg>
+  <div class="wrap grid">
+    <div class="slug"><span class="no">05</span><span class="nm">Антракт</span><span class="sb">пятнадцать минут</span></div>
+    <div>
+      <h2 class="h2 rv">А где тюльпаны?</h2>
+      <div class="body rv d1">
+        <p>Ты любишь тюльпаны. Я помню.</p>
+        <p>Но цветы в театре дарят тем, кто на сцене, — в конце, под аплодисменты. А в этот раз ты в зале, в пятом ряду, и играют для тебя. По правилам цветы сегодня не положены. Мы проверяли.</p>
+        <p>Тюльпаны никуда не делись. Их просто перенесли.</p>
+      </div>
+      <div class="notice rv d2">
+        <p class="label">объявление</p>
+        <p>Показ тюльпанов переносится на весну. Ранее приобретённая любовь действительна.</p>
+        <p>Буфет работает. Торт — см. кадр 01.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ПОДАРОК -->
+<section class="sec dark gift" id="gift" data-act="06 · Подарок">
+  <div class="beam" aria-hidden="true"></div>
+  <div class="wrap grid">
+    <div class="slug"><span class="no">06</span><span class="nm">Подарок</span><span class="sb">акт третий</span></div>
+    <div>
+      <h2 class="h2 rv">Билет ждёт <em>внутри</em></h2>
+      <p class="gift-intro rv d1">Спектакль называется «Верь своей собаке» и идёт в пространстве «Внутри». Значит, и подарок должен быть внутри. Он здесь.</p>
+      <div class="ticket rv d2" id="ticket">
+        <div class="t-main">
+          <div class="t-top"><span>пригласительный</span><span>партер</span></div>
+          <div class="t-show">«Верь своей собаке»</div>
+          <div class="t-venue">Пространство «Внутри» · Москва, ул. Казакова, 8, стр. 3</div>
+          <dl class="t-grid">
+            <div><dt>дата</dt><dd>07.12.26</dd></div>
+            <div><dt>начало</dt><dd>20:00</dd></div>
+            <div><dt>ряд / место</dt><dd>5 / 7</dd></div>
+          </dl>
+        </div>
+        <div class="t-stub">
+          <div><div class="label" style="color:#6a5246">контроль</div><div class="num2">№ 62</div></div>
+          <div class="barcode" aria-hidden="true"></div>
+        </div>
+      </div>
+      <p class="admitted">Контроль пройден. 7 декабря, 20:00, пятый ряд. Не опаздывай: после третьего звонка внутрь не пускают — даже бенефицианток.</p>
+      <div class="gift-actions">
+        <button class="btn" id="tear">Оторвать контроль <svg class="arrow" viewBox="0 0 28 14" aria-hidden="true"><path d="M0 7h26M20 1l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+        <button class="btn ghost" id="openTicket" hidden style="color:#EFEFC9;border-color:#EFEFC9">Открыть билет</button>
+      </div>
+      <p class="dog" id="dog" hidden>Верь своей собаке. И своей дочери: спектакль хороший.</p>
+    </div>
+  </div>
+  <div class="footlights" aria-hidden="true"></div>
+</section>
+
+<!-- ФИНАЛ -->
+<section class="sec wrap grid" data-act="07 · Финал">
+  <div class="slug"><span class="no">07</span><span class="nm">Финал</span><span class="sb">репертуар на 62-й сезон</span></div>
+  <div>
+    <h2 class="h2 rv">Чего <em>желаем</em></h2>
+    <ol class="rep">
+      <li class="rv">Премьер — больше, чем будней.</li>
+      <li class="rv">Кино — с таким финалом, чтобы молчать до самого дома.</li>
+      <li class="rv">Стихов, которые хочется переписать от руки. И переписывать.</li>
+      <li class="rv">Дорна — громче, Рахманинова — чаще. Соседи привыкнут.</li>
+      <li class="rv">Бабушке — здоровья. Вам обеим — ещё сто выходов в свет парой.</li>
+      <li class="rv">Зеркалу — и дальше путать цифры местами. Ему можно.</li>
+      <li class="rv">И оставаться собой. Это вообще твоя лучшая роль.</li>
+    </ol>
+    <div class="poem rv">
+      <p>Пусть будет бархат, свет и сцена,<br>и тишина перед звонком,<br>и ты в партере — королевой,<br>и мы с бабулей — тут, под боком.</p>
+      <p>Пусть жизнь идёт без репетиций,<br>зато всегда — на бис, на бис.<br>Пусть шестьдесят два тебе снится,<br>а утром — двадцать шесть. Сюрприз.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ПОКЛОН -->
+<section class="sec wrap grid bow" style="padding-top:0" data-act="08 · Поклон">
+  <div class="slug"><span class="no">08</span><span class="nm">Поклон</span><span class="sb">занавес</span></div>
+  <div>
+    <h2 class="display h-bow rv">С днём рождения, <em class="wavy">мама<svg viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M1 8 C 14 2, 24 12, 38 6 S 62 2, 76 7 S 92 9, 99 4"/></svg></em></h2>
+    <button class="btn rv d1" id="bravo">Браво!</button>
+    <p class="claps" id="claps" aria-live="polite"></p>
+    <div class="sign rv">
+      <p class="label muted">автор, режиссёр и самый громкий зритель</p>
+      <p class="who">твоя дочь</p>
+    </div>
+  </div>
+</section>
+
+<!-- ФУТЕР -->
+<footer class="dark foot" data-act="Конец">
+  <div class="wrap">
+    <p class="end" aria-hidden="true">Конец</p>
+    <div class="foot-grid">
+      <div><p class="label">театр</p><p>Театр одной мамы<br>Бенефис, сезон 62</p></div>
+      <div><p class="label">премьера</p><p>19 ноября 2026<br>единственный показ</p></div>
+      <div><p class="label">правила зала</p><p>Фотографировать можно.<br>Плакать тоже.</p></div>
+      <div><p class="label">ещё раз</p><p><a href="#top">Вернуться к началу ↑</a></p></div>
+    </div>
+  </div>
+</footer>
+
+<div class="tv" id="tv" role="dialog" aria-modal="true" aria-label="Электронный билет" hidden>
+  <div class="tv-bar"><b>Билет внутри</b><button class="tv-close" id="tvClose">Закрыть</button></div>
+  <div class="tv-scroll"><img src="photos/ticket.png" alt="Электронный билет: «Верь своей собаке», 7 декабря 2026, 20:00, пространство «Внутри», партер, ряд 5, место 7" loading="lazy"></div>
+  <div class="tv-foot">На входе покажи QR-код. Чтобы сохранить билет в телефон, нажми на него и подержи — или <a href="photos/ticket.png" target="_blank" rel="noopener">открой отдельно</a>.</div>
+</div>
+
+<div class="confetti" id="confetti" aria-hidden="true"></div>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function $(id){ return document.getElementById(id); }
+
+  /* reveal */
+  var els = document.querySelectorAll('.rv, .wavy');
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); } }); }, {threshold:.12, rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(el){ io.observe(el); });
+  } else els.forEach(function(el){ el.classList.add('is-in'); });
+
+  /* top bar: current act + progress */
+  var bar = $('bar'), actNow = $('actNow'), prog = $('prog');
+  if ('IntersectionObserver' in window){
+    var ao = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) actNow.textContent = e.target.getAttribute('data-act'); }); }, {rootMargin:'-45% 0px -50% 0px'});
+    document.querySelectorAll('[data-act]').forEach(function(s){ ao.observe(s); });
+  }
+  var ticking = false;
+  window.addEventListener('scroll', function(){
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(function(){
+      var h = document.documentElement.scrollHeight - innerHeight;
+      prog.style.transform = 'scaleX(' + (h > 0 ? Math.min(1, scrollY / h) : 0) + ')';
+      ticking = false;
+    });
+  }, {passive:true});
+
+  /* duotone: tap to develop */
+  document.querySelectorAll('.duo').forEach(function(d){
+    d.addEventListener('click', function(){ d.classList.toggle('color'); });
+  });
+
+  /* music box (Happy Birthday, synthesised). Своя песня: впиши файл в TRACK. */
+  var TRACK = '';
+  var ctx = null, master = null, playing = false, timer = null, audioEl = null;
+  var N = {G2:98,C3:130.81,D3:146.83,E3:164.81,F3:174.61,G3:196,G4:392,A4:440,B4:493.88,C5:523.25,D5:587.33,E5:659.25,F5:698.46,G5:783.99};
+  var SONG = [['G4',.75,'C3'],['G4',.25],['A4',1,'C3'],['G4',1],['C5',1,'E3'],['B4',2,'G2'],
+    ['G4',.75,'G2'],['G4',.25],['A4',1,'G2'],['G4',1],['D5',1,'G3'],['C5',2,'C3'],
+    ['G4',.75,'C3'],['G4',.25],['G5',1,'C3'],['E5',1],['C5',1,'F3'],['B4',1],['A4',2.5,'F3'],
+    ['F5',.75,'D3'],['F5',.25],['E5',1,'C3'],['C5',1],['D5',1,'G2'],['C5',3.5,'C3']];
+  var BEAT = .5;
+  function initAudio(){
+    if (ctx) return; var AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
+    ctx = new AC(); master = ctx.createGain(); master.gain.value = .0001;
+    var delay = ctx.createDelay(); delay.delayTime.value = .27; var fb = ctx.createGain(); fb.gain.value = .32;
+    var lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 2400;
+    master.connect(ctx.destination); master.connect(delay); delay.connect(lp); lp.connect(fb); fb.connect(delay); lp.connect(ctx.destination);
+  }
+  function bell(f, t, d, v){
+    [[1,1],[2,.28],[3.01,.08],[4.2,.04]].forEach(function(p){
+      var o = ctx.createOscillator(), g = ctx.createGain(); o.type = 'sine'; o.frequency.value = f * p[0];
+      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(v * p[1], t + .008);
+      g.gain.exponentialRampToValueAtTime(.0001, t + Math.max(.6, d * 1.8) / (p[0] > 1 ? 1.8 : 1));
+      o.connect(g); g.connect(master); o.start(t); o.stop(t + d * 2 + 1);
+    });
+  }
+  function playSong(){
+    if (!playing) return; var t = ctx.currentTime + .1, tot = 0;
+    SONG.forEach(function(n){ var d = n[1] * BEAT; bell(N[n[0]], t + tot, d, .16); if (n[2]) bell(N[n[2]], t + tot, BEAT * 3, .09); tot += d; });
+    timer = setTimeout(playSong, (tot + 2.6) * 1000);
+  }
+  var snd = $('sound');
+  function setBtn(){ snd.classList.toggle('on', playing); snd.setAttribute('aria-pressed', playing ? 'true' : 'false'); snd.querySelector('.lbl').textContent = playing ? 'звук вкл' : 'звук'; }
+  function startMusic(){
+    if (TRACK){ if (!audioEl){ audioEl = new Audio(TRACK); audioEl.loop = true; audioEl.volume = .7; } var pr = audioEl.play(); if (pr && pr.catch) pr.catch(function(){}); playing = true; setBtn(); return; }
+    initAudio(); if (!ctx) return; if (ctx.state === 'suspended') ctx.resume();
+    playing = true; master.gain.cancelScheduledValues(ctx.currentTime); master.gain.setTargetAtTime(.9, ctx.currentTime, .3);
+    clearTimeout(timer); playSong(); setBtn();
+  }
+  function stopMusic(){ playing = false; clearTimeout(timer); if (audioEl) audioEl.pause(); if (ctx) master.gain.setTargetAtTime(.0001, ctx.currentTime, .15); setBtn(); }
+  snd.addEventListener('click', function(){ try { playing ? stopMusic() : startMusic(); } catch(e){} });
+
+  /* curtain */
+  var curtain = $('curtain');
+  function openCurtain(music){
+    if (music) { try { startMusic(); } catch(e){} }
+    curtain.classList.add('open'); document.body.classList.remove('locked');
+    setTimeout(function(){ curtain.classList.add('gone'); bar.classList.add('show'); }, reduce ? 50 : 1800);
+  }
+  $('enter').addEventListener('click', function(){ openCurtain(true); });
+  $('enterSilent').addEventListener('click', function(){ openCurtain(false); });
+
+  /* mirror 62 ⇄ 26 */
+  var num = $('num'), refl = $('refl'), cap = $('cap');
+  var caps = ['Это тебе.', 'А это мне. Двадцать шесть лет я тебя догоняла — а догнала меня ты. Задом наперёд, но засчитано.'];
+  var st = 0, busy = false;
+  function flip(){
+    if (busy) return; busy = true; num.classList.add('turn'); cap.classList.add('fade');
+    setTimeout(function(){ st = 1 - st; var v = st ? '26' : '62'; num.textContent = v; refl.textContent = v; cap.textContent = caps[st]; num.classList.remove('turn'); cap.classList.remove('fade'); setTimeout(function(){ busy = false; }, 460); }, reduce ? 0 : 450);
+  }
+  $('flipBtn').addEventListener('click', flip);
+  if ('IntersectionObserver' in window){
+    var mo = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting && st === 0){ setTimeout(flip, 1500); mo.disconnect(); } }); }, {threshold:.55});
+    mo.observe($('mirror'));
+  }
+
+  /* ticket */
+  var tear = $('tear');
+  tear.addEventListener('click', function(){
+    $('ticket').classList.add('torn'); $('gift').classList.add('torn-done');
+    tear.hidden = true; $('openTicket').hidden = false; $('dog').hidden = false; burst(40);
+    $('openTicket').focus();
+  });
+  var tv = $('tv');
+  function openTv(){ tv.hidden = false; void tv.offsetWidth; tv.classList.add('open'); document.body.classList.add('locked'); $('tvClose').focus(); }
+  function closeTv(){ tv.classList.remove('open'); document.body.classList.remove('locked'); setTimeout(function(){ tv.hidden = true; }, 360); $('openTicket').focus(); }
+  $('openTicket').addEventListener('click', openTv);
+  $('tvClose').addEventListener('click', closeTv);
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && tv.classList.contains('open')) closeTv(); });
+
+  /* confetti + curtain call */
+  var conf = $('confetti'), colors = ['#640017', '#5A5E27', '#2F1B1A', '#c9cc8c'];
+  function burst(n){
+    if (reduce) return;
+    for (var i = 0; i < n; i++){
+      var el = document.createElement('i'), d = 2.4 + Math.random() * 2.2, sc = .7 + Math.random() * .9;
+      el.style.left = (Math.random() * 100) + 'vw'; el.style.background = colors[i % colors.length];
+      el.style.setProperty('--dx', ((Math.random() - .5) * 180) + 'px'); el.style.setProperty('--r', ((Math.random() - .5) * 900) + 'deg');
+      el.style.animationDuration = d + 's'; el.style.animationDelay = (Math.random() * .5) + 's';
+      el.style.width = (12 * sc) + 'px'; el.style.height = (18 * sc) + 'px';
+      conf.appendChild(el); (function(x, t){ setTimeout(function(){ x.remove(); }, t); })(el, (d + .6) * 1000);
+    }
+  }
+  var claps = 0, bowed = false;
+  var clapText = ['зал аплодирует', 'зал аплодирует стоя', 'бис!', 'ещё бис!', 'билетёрши плачут', 'занавес не опускается — не дают'];
+  function curtainCall(){
+    bowed = true; curtain.classList.remove('gone'); curtain.classList.add('bow-mode'); void curtain.offsetWidth;
+    curtain.classList.remove('open');
+    setTimeout(function(){ curtain.classList.add('open'); burst(90); }, reduce ? 300 : 2400);
+    setTimeout(function(){ curtain.classList.add('gone'); }, reduce ? 600 : 4200);
+  }
+  $('bravo').addEventListener('click', function(){
+    $('claps').textContent = clapText[Math.min(claps, clapText.length - 1)]; claps++;
+    if (!bowed) { curtainCall(); return; }
+    burst(60);
+  });
+})();
+</script>
+</body>
+</html>
